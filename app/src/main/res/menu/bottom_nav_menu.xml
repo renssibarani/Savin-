@@ -3,15 +3,15 @@
     <item
         android:id="@+id/navigationHome"
         android:title="Beranda"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_selector"
         />
     <item
-        android:id="@+id/navigationPromo"
+        android:id="@+id/navigationEwallet"
         android:title="Dompet"
         android:icon="@drawable/ic_wallet"
         />
     <item
-        android:id="@+id/navigationMessage"
+        android:id="@+id/navigationActivity"
         android:title="Activitas"
         android:icon="@drawable/ic_activity"
         />
@@ -20,5 +20,4 @@
         android:title="Pengaturan"
         android:icon="@drawable/ic_settings"
         />
-
 </menu>

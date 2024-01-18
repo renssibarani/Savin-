@@ -10,33 +10,48 @@
     <EditText
         android:id="@+id/etPIN"
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
         android:inputType="numberPassword"
         android:maxLength="6"
-        android:textSize="24dp"
+        android:imeOptions="actionDone"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="123456" />
+    <TextView
+        android:visibility="gone"
+        android:textColor="@color/red"
+        android:id="@+id/tvError"
+        android:padding="12dp"
+        tools:visibility="visible"
+        android:text="Password Salah !"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPIN"
+        />
 
     <GridLayout
+        android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPIN">
+        app:layout_constraintTop_toBottomOf="@+id/tvError">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn1"
             android:clickable="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -53,9 +68,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -72,9 +87,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -91,9 +106,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn4"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -110,9 +125,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn5"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -129,9 +144,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn6"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -148,9 +163,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn7"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -167,9 +182,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn8"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -186,9 +201,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn9"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -207,14 +222,13 @@
             android:id="@+id/btnFingerPrint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
-            android:src="@drawable/ic_fingerprint" />
+            android:layout_margin="16dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn0"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="16dp"
             android:background="@drawable/background_numpad">
 
             <TextView
@@ -233,7 +247,7 @@
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_delete" />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

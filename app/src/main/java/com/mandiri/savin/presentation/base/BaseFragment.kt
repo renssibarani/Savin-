@@ -40,4 +40,5 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     open fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
 }

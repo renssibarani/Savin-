@@ -4,7 +4,7 @@ import com.mandiri.savin.data.sharedPref.repository.UserRepository
 import javax.inject.Inject
 
 class SetTokenUseCase @Inject constructor(
-private val repository: UserRepository
+    private val repository: UserRepository
 ) {
     fun setToken(token: String) {
         repository.setToken(token)

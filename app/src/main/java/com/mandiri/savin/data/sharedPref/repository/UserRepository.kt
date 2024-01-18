@@ -4,7 +4,7 @@ import com.mandiri.savin.data.sharedPref.local.LocalDataSource
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
-    val datasource: LocalDataSource
+    private val datasource: LocalDataSource
 ) {
     fun getToken() = datasource.getToken()
 

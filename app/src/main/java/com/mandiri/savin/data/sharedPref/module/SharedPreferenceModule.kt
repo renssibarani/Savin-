@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SharePreferenceModule {
+object SharedPreferenceModule {
     private const val SHARED_PREF = "shared_pref"
 
     @Provides

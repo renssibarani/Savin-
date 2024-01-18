@@ -1,17 +1,20 @@
-package com.mandiri.savin.presentation
+package com.mandiri.savin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
+
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.mandiri.savin.HomeMainActivity
+import androidx.core.view.isVisible
 import com.mandiri.savin.databinding.ActivityLoginBinding
 import com.mandiri.savin.presentation.view.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.mandiri.savin.utils.CreateMessage.createToast
+
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -26,11 +29,34 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNumberPad()
         handleLogin()
+        observeViewModel()
+        if (viewModel.isUserLoggedIn()) {
+            handleTo(HomeMainActivity::class.java)
+        }
+    }
+    private fun observeViewModel() {
+        viewModel.isLogin.observe(this) {
+            if (it) {
+                handleVisibility(binding.componentNumpad.tvError, false)
+                createToast("Berhasil Login")
+                navigateToHome()
+            }
+        }
+
+        viewModel.errorMessage.observe(this) {
+            if (it.isNotEmpty()) {
+                handleVisibility(binding.componentNumpad.tvError, true)
+                createToast(it)
+            }
+        }
     }
 
+    private fun handleVisibility(view: View, isVisible: Boolean) {
+        view.isVisible = isVisible
+    }
     private fun setupNumberPad() {
         binding.componentNumpad.btn0.setOnClickListener{
-            Toast.makeText(applicationContext, "test", Toast.LENGTH_SHORT).show()
+            numberClicked("0")
         }
         binding.componentNumpad.btn1.setOnClickListener{
             numberClicked("1")
@@ -63,46 +89,48 @@ class LoginActivity : AppCompatActivity() {
             deleteNumber()
         }
     }
-
     private fun numberClicked(number: String) {
-        val setCurrentText = binding.componentNumpad.etPIN.setText(number)
-        Toast.makeText(applicationContext, setCurrentText.toString(), Toast.LENGTH_SHORT).show()
-//        val currentText = binding.componentNumpad.etPIN.text.toString()
-//        if (currentText.length < 6) {
-//            binding.componentNumpad.etPIN.append(number)
-//        }
+        val currentText = binding.componentNumpad.etPIN.text.toString()
+        if (currentText.length < 6) {
+            binding.componentNumpad.etPIN.append(number)
+        }
     }
-
     private fun deleteNumber() {
         val currentText = binding.componentNumpad.etPIN.text.toString()
         if (currentText.isNotEmpty()) {
             binding.componentNumpad.etPIN.setText(currentText.substring(0, currentText.length - 1))
         }
     }
-
     private fun handleLogin() {
-        binding.componentNumpad.etPIN.addTextChangedListener(object : TextWatcher{
+        binding.componentNumpad.etPIN.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
 
+            }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                TODO("Not yet implemented")
+
             }
 
             override fun afterTextChanged(s: Editable?) {
                 val value = s.toString()
-                Toast.makeText(this@LoginActivity, value, Toast.LENGTH_SHORT).show()
-            }
+                if (value.length == 6) {
+                    // Remove the text watcher to prevent recursive calls
+                    binding.componentNumpad.etPIN.removeTextChangedListener(this)
+                    viewModel.checkLoginPassword(value)
 
+                    // Optionally, re-add the text watcher if needed elsewhere
+                    binding.componentNumpad.etPIN.addTextChangedListener(this)
+                }
+            }
         })
     }
-
     private fun navigateToHome() {
         val intent = Intent(this@LoginActivity, HomeMainActivity::class.java)
         startActivity(intent)
         finish()
     }
-
+    private fun handleTo(clazz: Class<*>) {
+        val intent = Intent(this, clazz)
+        startActivity(intent)
+    }
 
 }

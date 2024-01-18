@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+        android:id="@+id/llLogoSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,5 +19,15 @@
             android:id="@+id/componentLogoSavin"
             layout="@layout/component_logo_savin" />
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loSplash"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llLogoSplash"
+        app:lottie_rawRes="@id/loSplash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
