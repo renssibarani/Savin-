@@ -1,15 +1,17 @@
 package com.mandiri.savin.data.network.usecase
 
 import com.mandiri.savin.data.model.ActivityModel
+import com.mandiri.savin.data.network.repository.ActivityDetailsRepository
 import com.mandiri.savin.data.network.repository.ActivityRepository
+import com.mandiri.savin.model.ActivityDetailsResponse
 import com.mandiri.savin.model.ActivityResponse
 import javax.inject.Inject
 
-class ActivityUseCase @Inject constructor(
-    private val repository: ActivityRepository
+class ActivityDetailsUseCase @Inject constructor(
+    private val repository: ActivityDetailsRepository
 ) {
-    suspend fun getActivity(): List<ActivityModel>? {
-        repository.getActivity().apply {
+    suspend fun getActivityDetails(path: String): List<ActivityModel>? {
+        repository.getActivityDetails(path).apply {
             if (isSuccessful) {
                 return body()?.let { mappingRemoteToModel(it) }
             }
@@ -17,7 +19,7 @@ class ActivityUseCase @Inject constructor(
         }
     }
 
-    suspend fun mappingRemoteToModel(response: List<ActivityResponse>): List<ActivityModel> {
+    suspend fun mappingRemoteToModel(response: List<ActivityDetailsResponse>): List<ActivityModel> {
         return response.mapNotNull { activityResponse ->
             activityResponse?.let {
                 ActivityModel(

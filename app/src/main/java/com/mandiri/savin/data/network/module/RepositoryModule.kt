@@ -1,6 +1,9 @@
 package com.mandiri.savin.data.network.module
 
+import com.mandiri.savin.data.network.remote.ActivityDetailsRemoteDataSourceImpl
 import com.mandiri.savin.data.network.remote.ActivityRemoteDataSource
+import com.mandiri.savin.data.network.repository.ActivityDetailsRepository
+import com.mandiri.savin.data.network.repository.ActivityDetailsRepositoryImpl
 import com.mandiri.savin.data.network.repository.ActivityRepository
 import com.mandiri.savin.data.network.repository.ActivityRepositoryImpl
 import dagger.Module
@@ -16,4 +19,9 @@ object RepositoryModule {
     @Singleton
     fun provideActivityRepository(datasource: ActivityRemoteDataSource): ActivityRepository =
         ActivityRepositoryImpl(datasource)
+
+    @Provides
+    @Singleton
+    fun provideActivityDetailsRepository(datasource: ActivityDetailsRemoteDataSourceImpl): ActivityDetailsRepository =
+        ActivityDetailsRepositoryImpl(datasource)
 }

@@ -1,6 +1,8 @@
 package com.mandiri.savin.data.network.module
 
 import com.mandiri.savin.data.ServiceSavin
+import com.mandiri.savin.data.network.remote.ActivityDetailsRemoteDataSource
+import com.mandiri.savin.data.network.remote.ActivityDetailsRemoteDataSourceImpl
 import com.mandiri.savin.data.network.remote.ActivityRemoteDataSource
 import com.mandiri.savin.data.network.remote.ActivityRemoteDataSourceImpl
 import dagger.Module
@@ -16,4 +18,8 @@ object DataSourceModule {
     @Singleton
     fun provideActivityRemoteDataSource(serviceSavin: ServiceSavin): ActivityRemoteDataSource =
         ActivityRemoteDataSourceImpl(serviceSavin)
+    @Provides
+    @Singleton
+    fun provideActivityDetailsRemoteDataSource(serviceSavin: ServiceSavin): ActivityDetailsRemoteDataSource =
+        ActivityDetailsRemoteDataSourceImpl(serviceSavin)
 }

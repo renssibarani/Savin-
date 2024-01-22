@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mandiri.savin.data.model.ActivityModel
+import com.mandiri.savin.data.network.usecase.ActivityDetailsUseCase
 import com.mandiri.savin.data.network.usecase.ActivityUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsEwalletViewModel @Inject constructor(
-    private val activityUseCase: ActivityUseCase
+    private val activityDetailsUseCase: ActivityDetailsUseCase
 ) : ViewModel() {
     private val _activityData = MutableLiveData<List<ActivityModel>>()
     val activityData: LiveData<List<ActivityModel>>
@@ -27,7 +28,7 @@ class DetailsEwalletViewModel @Inject constructor(
     }
 
     fun setActivityData(path: String) = viewModelScope.launch {
-        activityUseCase.getActivityEwallet(path).apply {
+        activityDetailsUseCase.getActivityDetails(path).apply {
             _isLoading.postValue(false)
             _activityData.postValue(this)
         }

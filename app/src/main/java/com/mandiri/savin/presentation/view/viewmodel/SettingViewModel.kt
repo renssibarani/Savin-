@@ -1,11 +1,8 @@
 package com.mandiri.savin.presentation.view.viewmodel
 
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mandiri.savin.LoginActivity
 import com.mandiri.savin.data.sharedPref.usecase.DeleteTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieDrawable
 import com.mandiri.savin.R
-import com.mandiri.savin.adapter.ActivityAdapter
+import com.mandiri.savin.adapter.ActivityDetailsAdapter
 import com.mandiri.savin.data.model.ActivityModel
 import com.mandiri.savin.data.model.EwalletModel
 import com.mandiri.savin.databinding.ActivityDetailWalletBinding
@@ -61,7 +61,7 @@ class DetailsEwallet : AppCompatActivity() {
     }
 
     private fun setActivityData(data: List<ActivityModel>) {
-        binding.componentActivityEwallet.rvActivity.adapter = ActivityAdapter(data)
+        binding.componentActivityEwallet.rvActivity.adapter = ActivityDetailsAdapter(data)
     }
 
 

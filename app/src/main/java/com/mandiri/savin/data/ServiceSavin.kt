@@ -1,5 +1,6 @@
 package com.mandiri.savin.data
 
+import com.mandiri.savin.model.ActivityDetailsResponse
 import com.mandiri.savin.model.ActivityResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -10,8 +11,8 @@ interface ServiceSavin {
     suspend fun getActivity():Response<List<ActivityResponse>>
 
     @GET("/{path}")
-    suspend fun getActivityEwallet(
+    suspend fun getActivityDetails(
         @Path("path") path: String
-    ):Response<List<ActivityResponse>>
+    ):Response<List<ActivityDetailsResponse>>
 
 }

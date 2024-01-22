@@ -5,6 +5,6 @@ import com.mandiri.savin.model.ActivityResponse
 import retrofit2.Response
 import java.util.SplittableRandom
 
-interface ActivityRepository {
-    suspend fun getActivity() : Response<List<ActivityResponse>>
+interface ActivityDetailsRepository {
+    suspend fun getActivityDetails(path: String) : Response<List<ActivityDetailsResponse>>
 }

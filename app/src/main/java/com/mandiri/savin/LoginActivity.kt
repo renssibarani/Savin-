@@ -113,11 +113,8 @@ class LoginActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val value = s.toString()
                 if (value.length == 6) {
-                    // Remove the text watcher to prevent recursive calls
                     binding.componentNumpad.etPIN.removeTextChangedListener(this)
                     viewModel.checkLoginPassword(value)
-
-                    // Optionally, re-add the text watcher if needed elsewhere
                     binding.componentNumpad.etPIN.addTextChangedListener(this)
                 }
             }

@@ -6,11 +6,11 @@ import com.mandiri.savin.model.ActivityResponse
 import retrofit2.Response
 import javax.inject.Inject
 
-class ActivityRemoteDataSourceImpl @Inject constructor(
+class ActivityDetailsRemoteDataSourceImpl @Inject constructor(
     private val service: ServiceSavin
-): ActivityRemoteDataSource {
-    override suspend fun getActivity(): Response<List<ActivityResponse>> {
-        return service.getActivity()
+): ActivityDetailsRemoteDataSource {
+    override suspend fun getActivityDetails(path: String): Response<List<ActivityDetailsResponse>> {
+        return service.getActivityDetails(path)
     }
 
 }
