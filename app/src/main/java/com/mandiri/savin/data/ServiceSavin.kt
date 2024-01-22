@@ -2,6 +2,7 @@ package com.mandiri.savin.data
 
 import com.mandiri.savin.model.ActivityDetailsResponse
 import com.mandiri.savin.model.ActivityResponse
+import com.mandiri.savin.model.ProfilResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,5 +15,8 @@ interface ServiceSavin {
     suspend fun getActivityDetails(
         @Path("path") path: String
     ):Response<List<ActivityDetailsResponse>>
+
+    @GET("/profil")
+    suspend fun getProfil():Response<ProfilResponse>
 
 }

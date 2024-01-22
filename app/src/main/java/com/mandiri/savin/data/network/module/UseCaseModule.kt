@@ -2,8 +2,10 @@ package com.mandiri.savin.data.network.module
 
 import com.mandiri.savin.data.network.repository.ActivityDetailsRepository
 import com.mandiri.savin.data.network.repository.ActivityRepository
+import com.mandiri.savin.data.network.repository.ProfilRepository
 import com.mandiri.savin.data.network.usecase.ActivityDetailsUseCase
 import com.mandiri.savin.data.network.usecase.ActivityUseCase
+import com.mandiri.savin.data.network.usecase.ProfilUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +23,8 @@ object UseCaseModule {
     @Singleton
     fun provideGetActivityDetailsUseCase(repository : ActivityDetailsRepository) =
         ActivityDetailsUseCase(repository)
+    @Provides
+    @Singleton
+    fun provideGetProfilUseCase(repository : ProfilRepository) =
+        ProfilUseCase(repository)
 }

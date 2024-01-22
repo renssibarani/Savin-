@@ -15,5 +15,4 @@ object DataSourceModule {
     @Singleton
     fun provideLocalDatasource(sharedPref: SharedPref) =
         LocalDataSource(sharedPref)
-
 }

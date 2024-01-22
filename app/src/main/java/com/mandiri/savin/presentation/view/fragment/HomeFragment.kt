@@ -8,14 +8,17 @@ import com.mandiri.savin.adapter.MenuHomeAdapter
 import com.mandiri.savin.data.model.EwalletModel
 import com.mandiri.savin.data.model.MenuModel
 import com.mandiri.savin.databinding.FragmentHomeBinding
+import com.mandiri.savin.model.ProfilResponse
 import com.mandiri.savin.presentation.base.BaseFragment
 import com.mandiri.savin.presentation.view.DetailsEwallet
 import com.mandiri.savin.presentation.view.viewmodel.HomeViewModel
+import com.mandiri.savin.presentation.view.viewmodel.ProfilViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: HomeViewModel by viewModels()
+    private val profilViewModel: ProfilViewModel by viewModels()
     private lateinit var menuAdapter: MenuHomeAdapter
     private var _ewalletHomeAdapterData: List<EwalletModel>? = null
     private var _ewalletHomeAdapter: EwalletHomeAdapter? = null
@@ -30,6 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setupView() {
         viewModel.setMenuHomeData()
         viewModel.setEwalletHomeData()
+        profilViewModel.setProfilData()
+        profilViewModel.fetchAndSaveProfile()
         observeViewModel()
     }
 
@@ -39,6 +44,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         viewModel.ewalletHomeData.observe(viewLifecycleOwner){
             setupViewEwallet(it)
+        }
+        profilViewModel.profilData.observe(viewLifecycleOwner){
+            setUserName(it)
         }
     }
     private fun setupViewEwallet(data: List<EwalletModel>){
@@ -58,6 +66,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         menuAdapter.setOnClickMenu {
             showToast("${it.menuTitle}")
         }
+    }
+
+    private fun setUserName(profilResponse: ProfilResponse) {
+        binding.tvName.text = profilResponse.name
     }
 
 }

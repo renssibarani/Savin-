@@ -10,7 +10,6 @@ class LocalDataSource @Inject constructor(
     fun setToken(token: String) {
         sharedPref.saveToken(token)
     }
-
     fun deleteToken() {
         sharedPref.deleteToken()
     }
