@@ -1,5 +1,7 @@
 package com.mandiri.savin.presentation.view.fragment
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ActivityFragment : BaseFragment<FragmentActivityBinding>() {
     private val viewModel: ActivityViewModel by viewModels()
+    private lateinit var activityAdapter: ActivityAdapter
+    private lateinit var originalData: List<ActivityModel>
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -28,9 +32,29 @@ class ActivityFragment : BaseFragment<FragmentActivityBinding>() {
             loading.observe(viewLifecycleOwner) {
                 setLoading(it)
             }
-        setActivityData()
+            setActivityData()
         }
+        activityAdapter = ActivityAdapter(emptyList())
+        binding.componentActivity.rvActivity.adapter = activityAdapter
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterData(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
         observeViewModel()
+    }
+
+    private fun filterData(query: String) {
+        val filteredList = originalData.filter {
+            it.title.contains(query, ignoreCase = true) ||
+                    it.date.contains(query, ignoreCase = true) ||
+                    it.balance.contains(query, ignoreCase = true)
+        }
+        activityAdapter.filterList(filteredList)
     }
 
     private fun observeViewModel() {
@@ -40,7 +64,8 @@ class ActivityFragment : BaseFragment<FragmentActivityBinding>() {
     }
 
     private fun setActivityData(data: List<ActivityModel>) {
-        binding.componentActivity.rvActivity.adapter = ActivityAdapter(data)
+        originalData = data
+        activityAdapter.filterList(data)
     }
 
     private fun setLoading(isLoading: Boolean) {

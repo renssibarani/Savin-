@@ -11,6 +11,7 @@ import com.mandiri.savin.databinding.ItemActivityBinding
 class ActivityAdapter(
     private val listActivity: List<ActivityModel>
 ) : Adapter<ActivityAdapter.ActivityViewHolder>() {
+    private var filteredList = listActivity
 
     inner class ActivityViewHolder(val binding: ItemActivityBinding) :
         ViewHolder(binding.root) {
@@ -19,9 +20,12 @@ class ActivityAdapter(
             binding.tvTitleTransaction.text = data.title
             binding.tvDateTransaction.text = data.date
             binding.tvBalanceTrsaction.text = data.balance
-
         }
 
+    }
+    fun filterList(filteredList: List<ActivityModel>) {
+        this.filteredList = filteredList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
@@ -35,11 +39,11 @@ class ActivityAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listActivity.size
+        return filteredList.size
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
-        holder.bind(listActivity[position])
+        holder.bind(filteredList[position])
     }
 
 

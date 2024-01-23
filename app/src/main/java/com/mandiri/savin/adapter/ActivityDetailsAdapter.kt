@@ -11,7 +11,6 @@ import com.mandiri.savin.databinding.ItemActivityBinding
 class ActivityDetailsAdapter(
     private val listActivity: List<ActivityModel>
 ) : Adapter<ActivityDetailsAdapter.ActivityViewHolder>() {
-
     inner class ActivityViewHolder(val binding: ItemActivityBinding) :
         ViewHolder(binding.root) {
         fun bind(data: ActivityModel) {
@@ -19,10 +18,9 @@ class ActivityDetailsAdapter(
             binding.tvTitleTransaction.text = data.title
             binding.tvDateTransaction.text = data.date
             binding.tvBalanceTrsaction.text = data.balance
-
         }
-
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
         return ActivityViewHolder(
