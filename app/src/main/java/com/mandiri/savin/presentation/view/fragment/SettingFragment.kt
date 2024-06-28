@@ -15,8 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
+
     private val viewModel: SettingViewModel by viewModels()
     private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
+
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -25,25 +27,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     override fun setupView() {
-        binding.btnLogout.setOnClickListener {
-            showConfirmation()
-        }
+        binding.btnLogout.setOnClickListener { showConfirmation() }
         observeViewModel()
         confirmationDialogUtil = ConfirmationDialogUtil(requireContext())
     }
 
-    private fun observeViewModel() {
-        viewModel.logout.observe(viewLifecycleOwner) {
-            navigateToLoginScreen()
-        }
-        viewModel.profilData.observe(viewLifecycleOwner){
-            it?.let {
-                setupPorfil(it)
-            }
-        }
+    private fun observeViewModel() = with(viewModel) {
+        logout.observe(viewLifecycleOwner) { navigateToLoginScreen() }
+        profilData.observe(viewLifecycleOwner) { it?.let { setupProfil(it) } }
     }
 
-    fun logout() {
+    private fun logout() {
         viewModel.logout()
     }
 
@@ -55,17 +49,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
     private fun showConfirmation() {
         confirmationDialogUtil.showConfirmationDialog(
-            onConfirm =
-            {
-                logout()
-            },
-            onCancle =
-            {
-
-            }
+            onConfirm = { logout() },
+            onCancel = {}
         )
     }
-    private fun setupPorfil(profile: ProfilResponse) {
+
+    private fun setupProfil(profile: ProfilResponse) {
         binding.tvName.text = profile.name
         binding.tvEmail.text = profile.email
         binding.tvPhone.text = profile.phoneNumber

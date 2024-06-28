@@ -10,19 +10,24 @@ import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieDrawable
 import com.mandiri.savin.R
 import com.mandiri.savin.adapter.ActivityDetailsAdapter
-import com.mandiri.savin.data.model.ActivityModel
-import com.mandiri.savin.data.model.EwalletModel
+import com.mandiri.savin.api.entity.ActivityModel
+import com.mandiri.savin.api.entity.EwalletResponse
 import com.mandiri.savin.databinding.ActivityDetailWalletBinding
 import com.mandiri.savin.presentation.view.bottomsheet.AddBalanceBottomSheet
 import com.mandiri.savin.presentation.view.bottomsheet.AuthBottomSheet
 import com.mandiri.savin.presentation.view.viewmodel.DetailsEwalletViewModel
+import com.mandiri.savin.utils.SavinUtils.createToast
+import com.mandiri.savin.utils.SavinUtils.formatEstimate
+import com.mandiri.savin.utils.SavinUtils.formatProgress
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailsEwallet : AppCompatActivity() {
+
     private lateinit var binding: ActivityDetailWalletBinding
-    private var data: EwalletModel? = null
+    private var data: EwalletResponse? = null
     private val viewModel: DetailsEwalletViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailWalletBinding.inflate(layoutInflater)
@@ -46,7 +51,7 @@ class DetailsEwallet : AppCompatActivity() {
         binding.llTopUpBalance.setOnClickListener {
             val addBalanceBinding = AddBalanceBottomSheet(this) { amount ->
                 val authBinding = AuthBottomSheet(this) { pin ->
-                    Toast.makeText(this, "Berhasil Tambah Saldo", Toast.LENGTH_SHORT).show()
+                    createToast("Berhasil Tambah Saldo")
                 }
                 authBinding.show()
             }
@@ -64,33 +69,25 @@ class DetailsEwallet : AppCompatActivity() {
         binding.componentActivityEwallet.rvActivity.adapter = ActivityDetailsAdapter(data)
     }
 
-
-    private fun setupViewDetails(data: EwalletModel?) {
+    private fun setupViewDetails(data: EwalletResponse?) {
         binding.tvBalance.text = data?.balance
         binding.tvSubTitle.text = data?.title
+
         if (data != null) {
             binding.pbEwallet.progress = data.progres
         }
         if (data != null) {
-            binding.tvProgres.text = formatProgress(data.progres)
+            binding.tvProgres.text = data.progres.formatProgress()
         }
         if (data != null) {
-            binding.tvEstimate.text = formatEstimate(data.message)
+            binding.tvEstimate.text = data.message.formatEstimate()
         }
-    }
-
-    fun formatProgress(progress: Int): String {
-        return "$progress%"
-    }
-
-    fun formatEstimate(estimate: String): String {
-        return "Tersisa ${estimate}"
     }
 
     companion object {
         const val DATA_EWALLET = "data_ewallet"
 
-        fun navigateToDetailEwallet(activity: Activity, data: EwalletModel) {
+        fun navigateToDetailEwallet(activity: Activity, data: EwalletResponse) {
             val intent = Intent(activity, DetailsEwallet::class.java)
             intent.putExtra(DATA_EWALLET, data)
             activity.startActivity(intent)

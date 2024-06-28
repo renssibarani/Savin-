@@ -3,28 +3,23 @@ package com.mandiri.savin.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mandiri.savin.data.model.MenuModel
+import com.mandiri.savin.api.entity.MenuResponse
 import com.mandiri.savin.databinding.ItemMenuBinding
 
 class MenuHomeAdapter(
-    private val listMenu: List<MenuModel>
+    private val listMenu: List<MenuResponse>
 ) : RecyclerView.Adapter<MenuHomeAdapter.MenuViewHolder>() {
-    private var _onClickMenu: (MenuModel) -> Unit = {}
+    private var onClickMenu: (MenuResponse) -> Unit = {}
 
-    fun setOnClickMenu(listener: (MenuModel) -> Unit) {
-        _onClickMenu = listener
-    }
+    fun setOnClickMenu(listener: (MenuResponse) -> Unit) { onClickMenu = listener }
 
     inner class MenuViewHolder(val binding: ItemMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: MenuModel, onClickMenu: (MenuModel) -> Unit) {
-            binding.ivItemMenu.setImageResource(data.image)
-            binding.tvTitle.text = data.menuTitle
-            binding.constraintItemMenu.setOnClickListener {
-                onClickMenu.invoke(data)
-            }
+        fun bind(data: MenuResponse, onClickMenu: (MenuResponse) -> Unit) = with(binding) {
+            ivItemMenu.setImageResource(data.image)
+            tvTitle.text = data.menuTitle
+            constraintItemMenu.setOnClickListener { onClickMenu.invoke(data) }
         }
-
     }
 
 
@@ -37,12 +32,9 @@ class MenuHomeAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return listMenu.size
-    }
+    override fun getItemCount(): Int { return listMenu.size }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        holder.bind(listMenu[position], _onClickMenu)
-
+        holder.bind(listMenu[position], onClickMenu)
     }
 }

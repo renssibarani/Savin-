@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mandiri.savin.data.model.ActivityModel
-import com.mandiri.savin.data.network.remote.ProfilRemoteDataSourceImpl
-import com.mandiri.savin.data.network.usecase.ProfilUseCase
-import com.mandiri.savin.data.sharedPref.SharedPref
+import com.mandiri.savin.api.data.usecase.ProfilUseCase
+import com.mandiri.savin.api.sharedPref.SharedPref
 import com.mandiri.savin.model.ProfilResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,10 +17,10 @@ class ProfilViewModel @Inject constructor(
     private val sharedPref: SharedPref
 ) : ViewModel() {
     private val _profilData = MutableLiveData<ProfilResponse>()
+    private val _isLoading = MutableLiveData<Boolean>()
+
     val profilData: LiveData<ProfilResponse>
         get() = _profilData
-
-    private val _isLoading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
         get() = _isLoading
 

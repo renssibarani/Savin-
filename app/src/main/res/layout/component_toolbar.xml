@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="14dp"
     android:layout_height="wrap_content"
-    >
+    android:padding="14dp">
 
     <ImageView
         android:id="@+id/ivBack"
@@ -26,6 +25,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivBack"
-        tools:text="Register" />
+        tools:text="Autentikasi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

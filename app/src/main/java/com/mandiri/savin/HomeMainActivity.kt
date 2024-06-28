@@ -1,12 +1,11 @@
 package com.mandiri.savin
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mandiri.savin.databinding.HomeMainActivityBinding
-import com.mandiri.savin.presentation.view.fragment.ActivityFragment
+import com.mandiri.savin.presentation.view.fragment.HistoryFragment
 import com.mandiri.savin.presentation.view.fragment.EwalletFragment
 import com.mandiri.savin.presentation.view.fragment.HomeFragment
 import com.mandiri.savin.presentation.view.fragment.SettingFragment
@@ -44,10 +43,10 @@ class HomeMainActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
 
-                R.id.navigationActivity -> {
+                R.id.navigationHistory -> {
                     item.setIcon(R.drawable.ic_activity_color)
                     resetToDefaultIcons()
-                    replaceFragment(ActivityFragment())
+                    replaceFragment(HistoryFragment())
                     return@OnNavigationItemSelectedListener true
                 }
 
@@ -70,7 +69,7 @@ class HomeMainActivity : AppCompatActivity() {
         val menu = binding.bottomNavigation.menu
         menu.findItem(R.id.navigationHome).setIcon(R.drawable.ic_home)
         menu.findItem(R.id.navigationEwallet).setIcon(R.drawable.ic_wallet)
-        menu.findItem(R.id.navigationActivity).setIcon(R.drawable.ic_activity)
+        menu.findItem(R.id.navigationHistory).setIcon(R.drawable.ic_activity)
         menu.findItem(R.id.navigationSetting).setIcon(R.drawable.ic_settings)
     }
 

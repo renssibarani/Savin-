@@ -44,7 +44,6 @@ class SplashscreenActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-
             viewModel.checkLoginPref().observe(this, loginObserver)
         }, 2000L)
     }

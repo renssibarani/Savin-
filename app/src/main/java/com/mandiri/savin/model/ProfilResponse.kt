@@ -17,5 +17,4 @@ data class ProfilResponse(
 
     @field:SerializedName("image_url")
     val imageUrl: String = "",
-
 ) : Parcelable

@@ -9,17 +9,14 @@ import com.mandiri.savin.databinding.DialogLayoutBinding
 class ConfirmationDialogUtil(private val context: Context) {
 
     fun showConfirmationDialog(
-//        title: String,
         onConfirm: () -> Unit,
-        onCancle: () -> Unit
+        onCancel: () -> Unit
     ) {
         val dialogBuilder = AlertDialog.Builder(context)
         val alertDialog = dialogBuilder.create()
 
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_layout, null)
         val dialogBinding = DialogLayoutBinding.bind(dialogView)
-
-//        dialogBinding.tvTitle.text = title
 
         alertDialog.setView(dialogView)
 
@@ -29,7 +26,7 @@ class ConfirmationDialogUtil(private val context: Context) {
         }
 
         dialogBinding.btnNegative.setOnClickListener {
-            onCancle.invoke()
+            onCancel.invoke()
             alertDialog.dismiss()
         }
         alertDialog.show()

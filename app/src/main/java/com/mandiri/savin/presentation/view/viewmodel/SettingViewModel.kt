@@ -3,8 +3,8 @@ package com.mandiri.savin.presentation.view.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mandiri.savin.data.sharedPref.SharedPref
-import com.mandiri.savin.data.sharedPref.usecase.DeleteTokenUseCase
+import com.mandiri.savin.api.sharedPref.SharedPref
+import com.mandiri.savin.api.sharedPref.usecase.DeleteTokenUseCase
 import com.mandiri.savin.model.ProfilResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,10 +14,11 @@ class SettingViewModel @Inject constructor(
     private val sharedPref: SharedPref,
     private val deleteTokenUseCase: DeleteTokenUseCase
 ) : ViewModel() {
-    private val _profilData = MutableLiveData<ProfilResponse?>()
-    val profilData: MutableLiveData<ProfilResponse?> = _profilData
 
+    private val _profilData = MutableLiveData<ProfilResponse?>()
     private val _logout = MutableLiveData<Unit>()
+
+    val profilData: MutableLiveData<ProfilResponse?> = _profilData
     val logout: LiveData<Unit>
         get() = _logout
 

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Savin\'</string>
+    <string name="tv_title_dompet">Dompet</string>
+    <string name="tv_title">nama_dompet</string>
+    <string name="tv_progress">100%</string>
 </resources>

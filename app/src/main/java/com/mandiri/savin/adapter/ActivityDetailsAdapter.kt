@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mandiri.savin.R
-import com.mandiri.savin.data.model.ActivityModel
+import com.mandiri.savin.api.entity.ActivityModel
 import com.mandiri.savin.databinding.ItemActivityBinding
 
 class ActivityDetailsAdapter(
@@ -13,11 +13,11 @@ class ActivityDetailsAdapter(
 ) : Adapter<ActivityDetailsAdapter.ActivityViewHolder>() {
     inner class ActivityViewHolder(val binding: ItemActivityBinding) :
         ViewHolder(binding.root) {
-        fun bind(data: ActivityModel) {
-            binding.ivLogoTrasaction.setImageResource(R.drawable.ic_trf_blck)
-            binding.tvTitleTransaction.text = data.title
-            binding.tvDateTransaction.text = data.date
-            binding.tvBalanceTrsaction.text = data.balance
+        fun bind(data: ActivityModel) = with(binding) {
+            ivLogoTrasaction.setImageResource(R.drawable.ic_trf_blck)
+            tvTitleTransaction.text = data.title
+            tvDateTransaction.text = data.date
+            tvBalanceTrsaction.text = data.balance
         }
     }
 
@@ -32,13 +32,9 @@ class ActivityDetailsAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return listActivity.size
-    }
+    override fun getItemCount(): Int { return listActivity.size }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         holder.bind(listActivity[position])
     }
-
-
 }

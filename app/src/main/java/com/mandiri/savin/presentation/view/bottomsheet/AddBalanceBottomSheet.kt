@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mandiri.savin.databinding.BottomSheetAddBalanceBinding
+import com.mandiri.savin.utils.SavinUtils.createToast
 
 class AddBalanceBottomSheet(
     private val context: Context,
@@ -23,7 +24,7 @@ class AddBalanceBottomSheet(
                 onConfirmAction(amount)
                 bottomSheetDialog.dismiss()
             } else {
-                Toast.makeText(context, "Masukkan Jumlah", Toast.LENGTH_SHORT).show()
+                context.createToast("Masukkan Jumlah : ")
             }
         }
         bottomSheetDialog.show()

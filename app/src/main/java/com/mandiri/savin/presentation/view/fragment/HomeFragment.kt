@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mandiri.savin.adapter.EwalletHomeAdapter
 import com.mandiri.savin.adapter.MenuHomeAdapter
-import com.mandiri.savin.data.model.EwalletModel
-import com.mandiri.savin.data.model.MenuModel
+import com.mandiri.savin.api.entity.EwalletResponse
+import com.mandiri.savin.api.entity.MenuResponse
 import com.mandiri.savin.databinding.FragmentHomeBinding
 import com.mandiri.savin.model.ProfilResponse
 import com.mandiri.savin.presentation.base.BaseFragment
@@ -17,10 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
     private val viewModel: HomeViewModel by viewModels()
     private val profilViewModel: ProfilViewModel by viewModels()
     private lateinit var menuAdapter: MenuHomeAdapter
-    private var _ewalletHomeAdapterData: List<EwalletModel>? = null
+    private var _ewalletHomeAdapterData: List<EwalletResponse>? = null
     private var _ewalletHomeAdapter: EwalletHomeAdapter? = null
 
     override fun inflateBinding(
@@ -49,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setUserName(it)
         }
     }
-    private fun setupViewEwallet(data: List<EwalletModel>){
+    private fun setupViewEwallet(data: List<EwalletResponse>){
         _ewalletHomeAdapterData = data
         _ewalletHomeAdapter = EwalletHomeAdapter(data){
             DetailsEwallet.navigateToDetailEwallet(
@@ -59,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         binding.componentEwalletHome.gridEwalletHome.adapter = _ewalletHomeAdapter
     }
-    private fun setupViewMenu(data: List<MenuModel>) {
+    private fun setupViewMenu(data: List<MenuResponse>) {
         menuAdapter = MenuHomeAdapter(data)
         binding.componentMenuHome.gridHome.adapter = menuAdapter
 

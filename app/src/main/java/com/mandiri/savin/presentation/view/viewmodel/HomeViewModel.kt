@@ -5,19 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mandiri.savin.R
-import com.mandiri.savin.data.model.EwalletModel
-import com.mandiri.savin.data.model.MenuModel
+import com.mandiri.savin.api.entity.EwalletResponse
+import com.mandiri.savin.api.entity.MenuResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor():ViewModel(){
-    private val _menuHomeData = MutableLiveData<List<MenuModel>>()
-    val menuHomeData: LiveData<List<MenuModel>>
+
+    private val _menuHomeData = MutableLiveData<List<MenuResponse>>()
+    private val _ewalletHomeData = MutableLiveData<List<EwalletResponse>>()
+
+    val menuHomeData: LiveData<List<MenuResponse>>
         get() = _menuHomeData
-    private val _ewalletHomeData = MutableLiveData<List<EwalletModel>>()
-    val ewalletHomeData: LiveData<List<EwalletModel>>
+    val ewalletHomeData: LiveData<List<EwalletResponse>>
         get() = _ewalletHomeData
 
 
@@ -29,51 +31,51 @@ class HomeViewModel @Inject constructor():ViewModel(){
         _ewalletHomeData.postValue(populateEwalletDataHome())
     }
 
-    private fun populateDataMenuHome(): List<MenuModel> {
+    private fun populateDataMenuHome(): List<MenuResponse> {
         return listOf(
-            MenuModel(
+            MenuResponse(
                 image = R.drawable.ic_trf,
                 menuTitle = "Transfer"
             ),
-            MenuModel(
+            MenuResponse(
                 image = R.drawable.ic_topup,
                 menuTitle = "Top Up"
             ),
-            MenuModel(
+            MenuResponse(
                 image = R.drawable.ic_pay,
                 menuTitle = "Bayar"
             ),
-            MenuModel(
+            MenuResponse(
                 image = R.drawable.ic_barcode,
                 menuTitle = "Qris"
             ),
         )
-
     }
-    private fun populateEwalletDataHome():List<EwalletModel>{
+
+    private fun populateEwalletDataHome():List<EwalletResponse>{
         return listOf(
-            EwalletModel(
+            EwalletResponse(
                 title = "Beli Mobil",
                 progres = 40,
                 message = "1 Tahun",
                 balance = "Rp. 1.000.000.000,00",
                 path = "mobil"
             ),
-            EwalletModel(
+            EwalletResponse(
                 title = "Beli Sepatu",
                 progres = 70,
                 message = "6 Bulan",
                 balance = "Rp. 1.000.000,00",
                 path = "sepatu"
             ),
-            EwalletModel(
+            EwalletResponse(
                 title = "Beli Motor",
                 progres = 50,
                 message = "8 Bulan",
                 balance = "Rp. 10.000.000,00",
                 path = "motor"
             ),
-            EwalletModel(
+            EwalletResponse(
                 title = "Beli Hp",
                 progres = 90,
                 message = "2 Bulan",

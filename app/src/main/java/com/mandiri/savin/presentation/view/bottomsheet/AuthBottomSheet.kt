@@ -21,10 +21,7 @@ class AuthBottomSheet(
         bottomSheetDialog.setContentView(binding.root)
         setupNumberPad()
         handleAuthPin()
-        binding.componentToolbarAuth.ivBack.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-        binding.componentToolbarAuth.tvToolbarTitle.text = "Autentikasi"
+        binding.componentToolbarAuth.ivBack.setOnClickListener { bottomSheetDialog.dismiss() }
         bottomSheetDialog.show()
     }
 

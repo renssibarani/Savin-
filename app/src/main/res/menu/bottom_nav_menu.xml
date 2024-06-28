@@ -11,8 +11,8 @@
         android:icon="@drawable/ic_wallet"
         />
     <item
-        android:id="@+id/navigationActivity"
-        android:title="Activitas"
+        android:id="@+id/navigationHistory"
+        android:title="History"
         android:icon="@drawable/ic_activity"
         />
     <item

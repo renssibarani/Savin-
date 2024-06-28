@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/constraintEwallet"
-    android:layout_width="200dp"
-    android:layout_height="160dp"
+    android:layout_width="175dp"
+    android:layout_height="150dp"
     android:layout_margin="10dp"
-    android:background="@drawable/background_ewallet_home">
+    android:background="@drawable/background_ewallet_home"
+    android:elevation="10dp">
 
     <TextView
         android:id="@+id/tvTitleDompet"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="Dompet"
+        android:text="@string/tv_title_dompet"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="Beli Sepatu"
+        android:text="@string/tv_title"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="50 %"
+        android:text="@string/tv_progress"
         android:textColor="@color/yellow"
         android:textSize="18sp"
         android:textStyle="bold"

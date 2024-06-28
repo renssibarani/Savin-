@@ -1,26 +1,23 @@
 package com.mandiri.savin
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.mandiri.savin.databinding.ActivityLoginBinding
 import com.mandiri.savin.presentation.view.viewmodel.LoginViewModel
+import com.mandiri.savin.utils.SavinUtils.createToast
 import dagger.hilt.android.AndroidEntryPoint
-import com.mandiri.savin.utils.CreateMessage.createToast
 
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
     val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
             handleTo(HomeMainActivity::class.java)
         }
     }
+
     private fun observeViewModel() {
         viewModel.isLogin.observe(this) {
             if (it) {
@@ -54,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
     private fun handleVisibility(view: View, isVisible: Boolean) {
         view.isVisible = isVisible
     }
+
     private fun setupNumberPad() {
         binding.componentNumpad.btn0.setOnClickListener{
             numberClicked("0")
@@ -89,18 +88,21 @@ class LoginActivity : AppCompatActivity() {
             deleteNumber()
         }
     }
+
     private fun numberClicked(number: String) {
         val currentText = binding.componentNumpad.etPIN.text.toString()
         if (currentText.length < 6) {
             binding.componentNumpad.etPIN.append(number)
         }
     }
+
     private fun deleteNumber() {
         val currentText = binding.componentNumpad.etPIN.text.toString()
         if (currentText.isNotEmpty()) {
             binding.componentNumpad.etPIN.setText(currentText.substring(0, currentText.length - 1))
         }
     }
+
     private fun handleLogin() {
         binding.componentNumpad.etPIN.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -120,14 +122,15 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun navigateToHome() {
         val intent = Intent(this@LoginActivity, HomeMainActivity::class.java)
         startActivity(intent)
         finish()
     }
+
     private fun handleTo(clazz: Class<*>) {
         val intent = Intent(this, clazz)
         startActivity(intent)
     }
-
 }

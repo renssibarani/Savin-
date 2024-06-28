@@ -3,7 +3,7 @@ package com.mandiri.savin.splashscreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mandiri.savin.data.sharedPref.usecase.GetTokenUseCase
+import com.mandiri.savin.api.sharedPref.usecase.GetTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

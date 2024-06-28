@@ -17,5 +17,4 @@ data class ActivityResponse(
 
     @field:SerializedName("transaction")
     val transaction: String = "",
-
 ):Parcelable
